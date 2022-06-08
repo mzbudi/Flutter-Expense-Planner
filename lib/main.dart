@@ -1,6 +1,7 @@
 import 'package:expense_planner/transaction.dart';
 import 'package:flutter/material.dart';
 import './transaction.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(Home());
@@ -26,7 +27,6 @@ class Home extends StatelessWidget {
             title: const Text("Expense Planner"),
           ),
           body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
@@ -36,8 +36,37 @@ class Home extends StatelessWidget {
                   elevation: 5,
                 ),
               ),
+              Card(
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const TextField(
+                        decoration: InputDecoration(labelText: "Title"),
+                      ),
+                      const TextField(
+                        decoration: InputDecoration(labelText: "Amount"),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 8),
+                        child: TextButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                              padding: MaterialStateProperty.all(
+                                  const EdgeInsets.all(20))),
+                          child: const Text("Add Transaction",
+                              style: TextStyle(
+                                  color: Colors.purple,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
               Column(
-                children: transactions.map((item) {
+                children: transactions.map((tx) {
                   return Row(
                     children: [
                       Container(
@@ -46,12 +75,26 @@ class Home extends StatelessWidget {
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black, width: 2)),
                         padding: const EdgeInsets.all(10),
-                        child: Text(item.amount.toString()),
+                        child: Text("\$${tx.amount}",
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.purple)),
                       ),
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(item.title),
-                          Text(item.date.toString())
+                          Text(
+                            tx.title,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          Text(
+                            DateFormat.yMEd().format(tx.date),
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                          )
                         ],
                       )
                     ],
