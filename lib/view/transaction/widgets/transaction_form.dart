@@ -7,6 +7,18 @@ class TransactionForm extends StatelessWidget {
 
   final titleController = TextEditingController();
   final amountController = TextEditingController();
+
+  void submitData() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = double.parse(amountController.text);
+
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+      return;
+    }
+
+    addTransaction(title: enteredTitle, amount: enteredAmount);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -16,20 +28,20 @@ class TransactionForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             TextField(
-              decoration: const InputDecoration(labelText: "Title"),
-              controller: titleController,
-            ),
+                decoration: const InputDecoration(labelText: "Title"),
+                controller: titleController,
+                onSubmitted: (_) => submitData()),
             TextField(
               decoration: const InputDecoration(labelText: "Amount"),
               controller: amountController,
+              keyboardType: TextInputType.number,
+              onSubmitted: ((_) => submitData()),
             ),
             Container(
               margin: const EdgeInsets.only(top: 8),
               child: TextButton(
                 onPressed: () {
-                  addTransaction(
-                      title: titleController.text,
-                      amount: double.parse(amountController.text));
+                  submitData();
                 },
                 style: ButtonStyle(
                     padding:
