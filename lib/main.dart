@@ -1,15 +1,61 @@
-import 'package:expense_planner/view/transaction/transaction_view.dart';
+import 'package:expense_planner/view/transaction/widgets/transaction_form.dart';
+import 'package:expense_planner/view/transaction/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
+import './models/transaction.dart';
+import './view/transaction/widgets/transaction_form.dart';
 
 void main() {
   runApp(const Home());
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   // final titleController = TextEditingController();
-  // String amountController = '';
+
+  final List<Transaction> _userTransactions = [
+    Transaction(
+        id: "T1", title: "New Shoes", amount: 14.6, date: DateTime.now()),
+    Transaction(
+        id: "T2", title: "New Bottle", amount: 24.126, date: DateTime.now()),
+    Transaction(
+        id: "T3", title: "New Shrt", amount: 34.1, date: DateTime.now()),
+    Transaction(
+        id: "T4", title: "New Shfirt", amount: 34.1, date: DateTime.now()),
+    Transaction(
+        id: "T5", title: "Nedsw Shirt", amount: 34.1, date: DateTime.now()),
+    Transaction(
+        id: "T6", title: "New Shairt", amount: 34.1, date: DateTime.now()),
+    Transaction(
+        id: "T7", title: "New Shdirt", amount: 34.1, date: DateTime.now()),
+    Transaction(
+        id: "T8", title: "New Sahirt", amount: 34.1, date: DateTime.now()),
+  ];
+
+  void _addTransactionModal(BuildContext ctx) {
+    showModalBottomSheet(
+        context: ctx,
+        builder: (_) {
+          return TransactionForm(addTransaction: _addTransaction);
+        });
+  }
+
+  void _addTransaction({required String title, required double amount}) {
+    final newTx = Transaction(
+        id: DateTime.now().toString(),
+        title: title,
+        amount: amount,
+        date: DateTime.now());
+
+    setState(() {
+      _userTransactions.add(newTx);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +64,12 @@ class Home extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Expense Planner"),
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.add),
-              splashRadius: 20,
+            Builder(
+              builder: (context) => IconButton(
+                onPressed: () => _addTransactionModal(context),
+                icon: const Icon(Icons.add),
+                splashRadius: 20,
+              ),
             )
           ],
         ),
@@ -36,13 +84,17 @@ class Home extends StatelessWidget {
                   elevation: 5,
                 ),
               ),
-              const TransactionView()
+              TransactionList(userTransactions: _userTransactions)
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.add),
+        floatingActionButton: Builder(
+          builder: (context) => FloatingActionButton(
+            onPressed: () {
+              _addTransactionModal(context);
+            },
+            child: const Icon(Icons.add),
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),

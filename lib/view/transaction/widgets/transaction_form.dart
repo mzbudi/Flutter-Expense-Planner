@@ -1,22 +1,42 @@
 import 'package:flutter/material.dart';
 
-class TransactionForm extends StatelessWidget {
-  TransactionForm({Key? key, required this.addTransaction}) : super(key: key);
+class TransactionForm extends StatefulWidget {
+  const TransactionForm({Key? key, required this.addTransaction})
+      : super(key: key);
 
   final Function addTransaction;
 
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+  @override
+  State<TransactionForm> createState() => _TransactionFormState();
+}
+
+class _TransactionFormState extends State<TransactionForm> {
+  late TextEditingController _titleController;
+  late TextEditingController _amountController;
+
+  @override
+  void initState() {
+    super.initState();
+    _titleController = TextEditingController();
+    _amountController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _amountController.dispose();
+    super.dispose();
+  }
 
   void submitData() {
-    final enteredTitle = titleController.text;
-    final enteredAmount = double.parse(amountController.text);
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);
 
     if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;
     }
 
-    addTransaction(title: enteredTitle, amount: enteredAmount);
+    widget.addTransaction(title: enteredTitle, amount: enteredAmount);
   }
 
   @override
@@ -29,11 +49,11 @@ class TransactionForm extends StatelessWidget {
           children: [
             TextField(
                 decoration: const InputDecoration(labelText: "Title"),
-                controller: titleController,
+                controller: _titleController,
                 onSubmitted: (_) => submitData()),
             TextField(
               decoration: const InputDecoration(labelText: "Amount"),
-              controller: amountController,
+              controller: _amountController,
               keyboardType: TextInputType.number,
               onSubmitted: ((_) => submitData()),
             ),
