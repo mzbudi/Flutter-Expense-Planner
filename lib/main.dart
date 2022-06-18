@@ -19,7 +19,23 @@ class CoreClass extends StatelessWidget {
           colorScheme: ColorScheme.fromSwatch(
               primarySwatch: Colors.purple, accentColor: Colors.amber),
           primaryColor: Colors.purple,
-          fontFamily: 'Quicksand'),
+          fontFamily: 'Quicksand',
+          textTheme: const TextTheme(
+            titleMedium: TextStyle(
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+            bodyMedium: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
+          ),
+          appBarTheme: const AppBarTheme(
+              titleTextStyle: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold))),
       home: const Home(),
     );
   }
