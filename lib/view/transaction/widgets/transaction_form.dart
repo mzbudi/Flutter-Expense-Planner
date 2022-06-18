@@ -11,15 +11,8 @@ class TransactionForm extends StatefulWidget {
 }
 
 class _TransactionFormState extends State<TransactionForm> {
-  late TextEditingController _titleController;
-  late TextEditingController _amountController;
-
-  @override
-  void initState() {
-    super.initState();
-    _titleController = TextEditingController();
-    _amountController = TextEditingController();
-  }
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
 
   @override
   void dispose() {
@@ -37,6 +30,7 @@ class _TransactionFormState extends State<TransactionForm> {
     }
 
     widget.addTransaction(title: enteredTitle, amount: enteredAmount);
+    Navigator.of(context).pop();
   }
 
   @override
@@ -48,14 +42,15 @@ class _TransactionFormState extends State<TransactionForm> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             TextField(
-                decoration: const InputDecoration(labelText: "Title"),
-                controller: _titleController,
-                onSubmitted: (_) => submitData()),
+              decoration: const InputDecoration(labelText: "Title"),
+              controller: _titleController,
+              onSubmitted: (_) => submitData(),
+            ),
             TextField(
               decoration: const InputDecoration(labelText: "Amount"),
               controller: _amountController,
               keyboardType: TextInputType.number,
-              onSubmitted: ((_) => submitData()),
+              onSubmitted: (_) => submitData(),
             ),
             Container(
               margin: const EdgeInsets.only(top: 8),

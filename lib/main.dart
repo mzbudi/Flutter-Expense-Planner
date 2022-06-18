@@ -5,7 +5,24 @@ import './models/transaction.dart';
 import './view/transaction/widgets/transaction_form.dart';
 
 void main() {
-  runApp(const Home());
+  runApp(const CoreClass());
+}
+
+class CoreClass extends StatelessWidget {
+  const CoreClass({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Expense Planner",
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: Colors.purple, accentColor: Colors.amber),
+          primaryColor: Colors.purple,
+          fontFamily: 'Quicksand'),
+      home: const Home(),
+    );
+  }
 }
 
 class Home extends StatefulWidget {
@@ -59,45 +76,43 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Expense Planner"),
-          actions: [
-            Builder(
-              builder: (context) => IconButton(
-                onPressed: () => _addTransactionModal(context),
-                icon: const Icon(Icons.add),
-                splashRadius: 20,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Expense Planner"),
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              onPressed: () => _addTransactionModal(context),
+              icon: const Icon(Icons.add),
+              splashRadius: 20,
+            ),
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(
+              width: double.infinity,
+              child: Card(
+                child: Text("Chart"),
+                elevation: 5,
               ),
-            )
+            ),
+            TransactionList(userTransactions: _userTransactions)
           ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                width: double.infinity,
-                child: const Card(
-                  child: Text("Chart"),
-                  elevation: 5,
-                ),
-              ),
-              TransactionList(userTransactions: _userTransactions)
-            ],
-          ),
-        ),
-        floatingActionButton: Builder(
-          builder: (context) => FloatingActionButton(
-            onPressed: () {
-              _addTransactionModal(context);
-            },
-            child: const Icon(Icons.add),
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
+      floatingActionButton: Builder(
+        builder: (context) => FloatingActionButton(
+          onPressed: () {
+            _addTransactionModal(context);
+          },
+          child: const Icon(Icons.add),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

@@ -22,14 +22,16 @@ class TransactionList extends StatelessWidget {
                   margin:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 2)),
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 2)),
                   padding: const EdgeInsets.all(10),
                   child: Text(
                       "\$${userTransactions[index].amount.toStringAsFixed(2)}",
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.purple)),
+                          color: Theme.of(context).colorScheme.primary)),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,8 +43,9 @@ class TransactionList extends StatelessWidget {
                     ),
                     Text(
                       DateFormat.yMEd().format(userTransactions[index].date),
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.grey),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary),
                     )
                   ],
                 )
