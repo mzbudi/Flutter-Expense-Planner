@@ -37,10 +37,17 @@ class _TransactionFormState extends State<TransactionForm> {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const Text(
+              'Add Item',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.purple),
+            ),
             TextField(
               decoration: const InputDecoration(labelText: "Title"),
               controller: _titleController,
