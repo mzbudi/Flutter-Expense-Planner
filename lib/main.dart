@@ -17,8 +17,8 @@ class CoreClass extends StatelessWidget {
       title: "Expense Planner",
       theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: Colors.purple, accentColor: Colors.amber),
-          primaryColor: Colors.purple,
+              primarySwatch: Colors.blue, accentColor: Colors.amber),
+          primaryColor: Colors.blue,
           fontFamily: 'Quicksand',
           textTheme: const TextTheme(
             titleMedium: TextStyle(
@@ -52,22 +52,22 @@ class _HomeState extends State<Home> {
   // final titleController = TextEditingController();
 
   final List<Transaction> _userTransactions = [
-    Transaction(
-        id: "T1", title: "New Shoes", amount: 14.6, date: DateTime.now()),
-    Transaction(
-        id: "T2", title: "New Bottle", amount: 24.126, date: DateTime.now()),
-    Transaction(
-        id: "T3", title: "New Shrt", amount: 34.1, date: DateTime.now()),
-    Transaction(
-        id: "T4", title: "New Shfirt", amount: 34.1, date: DateTime.now()),
-    Transaction(
-        id: "T5", title: "Nedsw Shirt", amount: 34.1, date: DateTime.now()),
-    Transaction(
-        id: "T6", title: "New Shairt", amount: 34.1, date: DateTime.now()),
-    Transaction(
-        id: "T7", title: "New Shdirt", amount: 34.1, date: DateTime.now()),
-    Transaction(
-        id: "T8", title: "New Sahirt", amount: 34.1, date: DateTime.now()),
+    // Transaction(
+    //     id: "T1", title: "New Shoes", amount: 14.6, date: DateTime.now()),
+    // Transaction(
+    //     id: "T2", title: "New Bottle", amount: 24.126, date: DateTime.now()),
+    // Transaction(
+    //     id: "T3", title: "New Shrt", amount: 34.1, date: DateTime.now()),
+    // Transaction(
+    //     id: "T4", title: "New Shfirt", amount: 34.1, date: DateTime.now()),
+    // Transaction(
+    //     id: "T5", title: "Nedsw Shirt", amount: 34.1, date: DateTime.now()),
+    // Transaction(
+    //     id: "T6", title: "New Shairt", amount: 34.1, date: DateTime.now()),
+    // Transaction(
+    //     id: "T7", title: "New Shdirt", amount: 34.1, date: DateTime.now()),
+    // Transaction(
+    //     id: "T8", title: "New Sahirt", amount: 34.1, date: DateTime.now()),
   ];
 
   void _addTransactionModal(BuildContext ctx) {

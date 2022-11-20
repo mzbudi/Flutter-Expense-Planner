@@ -44,9 +44,9 @@ class _TransactionFormState extends State<TransactionForm> {
             const Text(
               'Add Item',
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.purple),
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
             ),
             TextField(
               decoration: const InputDecoration(labelText: "Title"),
@@ -69,8 +69,7 @@ class _TransactionFormState extends State<TransactionForm> {
                     padding:
                         MaterialStateProperty.all(const EdgeInsets.all(20))),
                 child: const Text("Add Transaction",
-                    style: TextStyle(
-                        color: Colors.purple, fontWeight: FontWeight.bold)),
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               ),
             )
           ],
